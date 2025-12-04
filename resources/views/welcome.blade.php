@@ -66,53 +66,44 @@
     <!-- Navigation / Auth Links -->
     <nav class="absolute top-0 w-full z-50 p-6 flex justify-between items-center text-white bg-gradient-to-b from-black/70 to-transparent">
         <div class="font-headline text-2xl font-bold tracking-wide">
-            Angkol Resort Hub
+            <a href="/">Angkol Resort Hub</a>
         </div>
         
-        @if (Route::has('login'))
-            <div class="space-x-4 text-sm font-semibold">
-                <!-- CUSTOMER / USER -->
-                @auth('web')
-                    <a href="{{ url('/dashboard') }}" class="hover:text-primary transition">Dashboard</a>
-                @else
-                    <a href="{{ route('login') }}" class="hover:text-primary transition">Log in</a>
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="bg-primary px-4 py-2 rounded-md hover:bg-green-800 transition">Sign Up</a>
-                    @endif
-                @endauth
-
-                <!-- ADMIN -->
-                @auth('admin')
-                    <a href="{{ url('/admin/dashboard') }}" class="hover:text-primary transition">Admin Dashboard</a>
-                @else
-                    <a href="{{ route('admin.login') }}" class="hover:text-primary transition">Admin</a>
-                @endauth
-
-                <!-- STAFF (Formerly Teacher) -->
-                @auth('teacher')
-                    <a href="{{ url('/teacher/dashboard') }}" class="hover:text-primary transition">Staff Dashboard</a>
-                @else
-                    <a href="{{ route('teacher.login') }}" class="hover:text-primary transition">Staff</a>
-                @endauth
-            </div>
-        @endif
+        <div class="space-x-4 text-sm font-semibold flex items-center">
+            @auth
+                <form method="POST" action="{{ route('logout') }}" class="inline">
+                    @csrf
+                    <a href="{{ route('logout') }}" 
+                       onclick="event.preventDefault(); this.closest('form').submit();" 
+                       class="px-4 py-2 rounded-md hover:text-primary transition">
+                       Logout
+                    </a>
+                </form>
+            @else
+                <a href="{{ route('login') }}" class="px-4 py-2 rounded-md hover:bg-white hover:text-primary transition">Customer Log in</a>
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}" class="bg-primary text-white px-4 py-2 rounded-md hover:bg-green-800 transition">Sign Up</a>
+                @endif
+                <a href="{{ route('admin.login') }}" class="px-4 py-2 rounded-md hover:bg-white hover:text-primary transition">Admin/Staff Log in</a>
+            @endauth
+        </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative h-[65vh] w-full overflow-hidden">
-        <!-- Image 4 is the Hero Image -->
-        <img 
-            src="{{ asset('images/image4.jpg') }}" 
-            alt="Landscape view of Angkol Resort" 
-            class="absolute inset-0 w-full h-full object-cover brightness-50"
-        >
-        <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4 text-white">
+    <section class="relative h-[80vh] w-full overflow-hidden flex items-center justify-center text-center bg-cover bg-center" style="background-image: url('{{ asset('images/image4.jpg') }}');">
+        <div class="absolute inset-0 bg-black/60"></div>
+        <div class="relative z-10 p-4 text-white">
             <h1 class="text-5xl md:text-7xl font-headline font-bold drop-shadow-lg animate-fade-in-down">
-                Welcome to Angkol Resort Hub
+                Escape to Angkol Resort Hub
             </h1>
             <p class="mt-4 text-lg md:text-xl max-w-2xl drop-shadow-md animate-fade-in-up text-gray-200">
-                Your serene escape into nature's embrace.
+                Discover a haven of peace and serenity. Book your perfect getaway today.
             </p>
+            <div class="mt-8">
+                <a href="{{ route('register') }}" class="bg-primary text-white font-bold py-3 px-8 rounded-lg hover:bg-green-700 transition duration-300 shadow-lg animate-fade-in-up">
+                    Book Now
+                </a>
+            </div>
         </div>
     </section>
 
