@@ -12,8 +12,10 @@ class Room extends Model
     protected $fillable = [
         'room_number',
         'type',
-        'price',
-        'is_available',
+        'description',
+        'price_per_night',
+        'status',
+        'image_path',
     ];
 
     public function reservations()

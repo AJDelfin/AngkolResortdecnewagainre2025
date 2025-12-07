@@ -1,29 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Staff</title>
-</head>
-<body>
-    <h1>Edit Staff</h1>
-
-    <form action="{{ route('admin.staff.update', $staff) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <div>
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" value="{{ $staff->name }}">
+<x-admin-layout>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <h1 class="text-2xl font-bold">Edit Staff</h1>
+                    <form action="{{ route('admin.staff.update', $staff) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="mt-4">
+                            <label for="name" class="block font-medium text-sm text-gray-700">Name</label>
+                            <input type="text" name="name" id="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" value="{{ $staff->name }}" required>
+                        </div>
+                        <div class="mt-4">
+                            <label for="email" class="block font-medium text-sm text-gray-700">Email</label>
+                            <input type="email" name="email" id="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" value="{{ $staff->email }}" required>
+                        </div>
+                        <div class="mt-4">
+                            <label for="password" class="block font-medium text-sm text-gray-700">Password (leave blank to keep current password)</label>
+                            <input type="password" name="password" id="password" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        </div>
+                        <div class="mt-4">
+                            <label for="image" class="block font-medium text-sm text-gray-700">Image</label>
+                            <input type="file" name="image" id="image" class="mt-1 block w-full">
+                            @if ($staff->image_path)
+                                <div class="mt-2">
+                                    <img src="{{ asset('storage/' . $staff->image_path) }}" alt="{{ $staff->name }}" class="w-20 h-20 object-cover rounded-full">
+                                </div>
+                            @endif
+                        </div>
+                        <div class="mt-6">
+                            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div>
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" value="{{ $staff->email }}">
-        </div>
-        <div>
-            <label for="password">Password (leave blank to keep current password)</label>
-            <input type="password" name="password" id="password">
-        </div>
-        <button type="submit">Update Staff</button>
-    </form>
-</body>
-</html>
+    </div>
+</x-admin-layout>

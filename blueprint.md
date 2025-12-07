@@ -1,40 +1,43 @@
-# Project Blueprint
+# Project Blueprint: Angkol Resort Hub
 
-## Overview
+## 1. Overview
 
-This project is a full-stack web application built with Laravel. It is designed to be a reservation system with role-based access control for admins, staff, and customers.
+This document outlines the development plan for the Angkol Resort Hub, a comprehensive web application for managing resort operations. The application will provide a centralized platform for staff to manage reservations, guest information, billing, and financial reporting. It will also offer a user-friendly interface for guests to book accommodations and services.
 
-## Implemented Features
+## 2. Style and Design
 
-### Style and Design
-- Modern user interface with a clean and intuitive layout.
-- Responsive design for both mobile and web.
-- Consistent color scheme and typography.
-- Use of icons to enhance user experience.
+### 2.1. Aesthetics
 
-### User Roles and Permissions
-- **Admin:** Full access to all system features, including user management (staff and customers) and all reservation data.
-- **Staff:** Can view and manage reservations.
-- **Customer:** Can make and view their own reservations.
+The application will feature a modern and visually appealing design that is both professional and easy to use. The user interface will be clean, with a balanced layout and ample white space to improve readability. The color palette will be inspired by the natural beauty of a tropical resort, with a focus on calming and inviting colors.
 
-### Authentication
-- Separate login for customers.
-- Combined login for admin and staff.
-- Registration page for new customers.
+### 2.2. Color Palette
 
-## Current Task: Fix Login and Registration
+*   **Primary:** `#15803d` (dark green)
+*   **Cream:** `#fdfbf6`
+*   **Dark:** `#1a1a1a`
 
-### Plan
-1.  **Create combined login for admin and staff:**
-    *   Create a new controller `AdminLoginController` to handle authentication for both admin and staff.
-    *   Create a new view `admin_login.blade.php` for the combined login form.
-    *   Define a new route for the admin/staff login page.
-2.  **Update user seeder:**
-    *   Modify the `AdminUserSeeder` to use the passwords you provided for the admin and staff accounts.
-3.  **Create a dedicated customer registration and login:**
-    *   Ensure the default Laravel registration and login routes are used for customers.
-4.  **Update navigation:**
-    *   Modify the main welcome page to include links to the customer login/registration and the admin/staff login.
-5.  **Run migrations and seeders:**
-    *   Run the database migrations to create the necessary tables.
-    *   Run the seeders to populate the database with the admin and staff users.
+### 2.3. Typography
+
+*   **Headlines:** "Playfair Display", serif
+*   **Body Text:** "Lato", sans-serif
+
+## 3. Implemented Features
+
+*   **User Roles:** The application will have distinct roles for administrators, staff, and customers, each with a tailored dashboard and specific permissions.
+*   **Admin Dashboard:** A comprehensive dashboard for administrators to manage all aspects of the resort, including user accounts, content, and system settings.
+*   **Financial Reports:** A dedicated section for viewing and managing financial reports, providing insights into revenue, expenses, and profitability.
+*   **Export Financial Reports:** Functionality to export financial reports to a CSV file.
+*   **Food Packages Management:** A dedicated section for managing food packages, including creating, editing, and deleting packages, as well as bulk deletion.
+
+## 4. Current Task: Add Bulk-Destroy to Food Packages Module
+
+### 4.1. Goal
+
+The current development focus is on adding bulk-destroy functionality to the food packages module, allowing administrators to delete multiple food packages at once.
+
+### 4.2. Plan
+
+1.  **Add Route:** Add a `delete` route to `routes/web.php` for bulk deletion of food packages.
+2.  **Add Controller Method:** Add a `bulkDestroy` method to the `FoodPackageController` to handle the logic for deleting multiple food packages.
+3.  **Update Index View:** The `index.blade.php` file for food packages was previously updated to include a form and checkboxes for bulk deletion.
+4.  **Update `index` Method:** The `index` method in the `FoodPackageController` was updated to use pagination.
